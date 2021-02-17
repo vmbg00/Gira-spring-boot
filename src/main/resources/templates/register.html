@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 
 <head>
     <meta charset="UTF-8"/>
@@ -13,7 +13,7 @@
 
 <body>
 <div class="page-container">
-    <header>
+    <header th:replace="fragments/fragment :: header">
         <nav class="navbar navbar-expand-lg ">
       <span class="col-md-1">
         <img src="/img/projectLogo.png" alt="Logo" width="50" height="50">
@@ -70,7 +70,7 @@
             </div>
         </form>
     </main>
-    <footer class="footer">
+    <footer th:replace="fragments/fragment :: footer" class="footer">
         <div class="container-fluid text-center">
             <div class="footer-background h6">
                 &copy; Spring team 2020. All rights reserved.
