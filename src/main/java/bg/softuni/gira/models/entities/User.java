@@ -20,8 +20,9 @@ public class User extends BaseEntity{
         return username;
     }
 
-    public void setUsername(String username) {
+    public User setUsername(String username) {
         this.username = username;
+        return this;
     }
 
     @Column(nullable = false)
@@ -29,8 +30,9 @@ public class User extends BaseEntity{
         return password;
     }
 
-    public void setPassword(String password) {
+    public User setPassword(String password) {
         this.password = password;
+        return this;
     }
 
     @Column(unique = true, nullable = false)
@@ -38,7 +40,8 @@ public class User extends BaseEntity{
         return email;
     }
 
-    public void setEmail(String email) {
+    public User setEmail(String email) {
         this.email = email;
+        return this;
     }
 }
