@@ -12,7 +12,7 @@ public class TaskViewModel {
     private String name;
     private String assignedTo;
     private ClassificationName classification;
-    private Date dueDate;
+    private String dueDate;
     private ProgressEnums progress;
 
     public TaskViewModel() {
@@ -54,12 +54,11 @@ public class TaskViewModel {
         return this;
     }
 
-    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
-    public Date getDueDate() {
+    public String getDueDate() {
         return dueDate;
     }
 
-    public TaskViewModel setDueDate(Date dueDate) {
+    public TaskViewModel setDueDate(String dueDate) {
         this.dueDate = dueDate;
         return this;
     }

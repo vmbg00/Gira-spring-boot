@@ -14,8 +14,13 @@ import bg.softuni.gira.services.TaskService;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 @Service
 public class TaskServiceImpl implements TaskService {
@@ -52,8 +57,9 @@ public class TaskServiceImpl implements TaskService {
     }
 
     @Override
-    public List<TaskViewModel> allTasks() {
+    public List<TaskViewModel> allTasks() throws ParseException {
         List<TaskViewModel> tasks = new ArrayList<>();
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH);
 
         List<Task> allTasks = this.taskRepository.findAll();
 
@@ -62,6 +68,7 @@ public class TaskServiceImpl implements TaskService {
             modelMapper.map(task, taskViewModel);
 
             taskViewModel.setAssignedTo(task.getUser().getUsername());
+            taskViewModel.setDueDate(formatter.format(task.getDueDate()));
             tasks.add(taskViewModel);
         }
 
