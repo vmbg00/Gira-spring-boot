@@ -1,6 +1,7 @@
 package bg.softuni.gira.models.services;
 
 import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
 public class UserRegisterServiceModel {
@@ -12,6 +13,7 @@ public class UserRegisterServiceModel {
     public UserRegisterServiceModel() {
     }
 
+    @NotBlank(message = "Cannot be empty")
     @Size(min = 3, max = 20, message = "Username length must be between 3 and 20 characters")
     public String getUsername() {
         return username;
@@ -21,7 +23,8 @@ public class UserRegisterServiceModel {
         this.username = username;
     }
 
-    @Email(message = "Invalid email")
+    @NotBlank(message = "Cannot be empty")
+    @Email
     public String getEmail() {
         return email;
     }
@@ -30,7 +33,8 @@ public class UserRegisterServiceModel {
         this.email = email;
     }
 
-    @Size(min = 3, max = 20, message = "Username length must be between 3 and 20 characters")
+    @NotBlank(message = "Cannot be empty")
+    @Size(min = 3, max = 20, message = "Password length must be between 3 and 20 characters")
     public String getPassword() {
         return password;
     }
@@ -39,7 +43,7 @@ public class UserRegisterServiceModel {
         this.password = password;
     }
 
-
+    @NotBlank(message = "Cannot be empty")
     public String getConfirmPassword() {
         return confirmPassword;
     }
