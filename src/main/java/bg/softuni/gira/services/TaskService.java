@@ -10,4 +10,6 @@ public interface TaskService {
     void addTask(TaskAddServiceModel taskAddServiceModel);
 
     List<TaskViewModel> allTasks();
+
+    void progressUp(Long id);
 }

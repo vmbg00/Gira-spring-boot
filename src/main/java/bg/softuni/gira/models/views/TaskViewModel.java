@@ -8,6 +8,7 @@ import java.time.LocalDateTime;
 import java.util.Date;
 
 public class TaskViewModel {
+    private Long id;
     private String name;
     private String assignedTo;
     private ClassificationName classification;
@@ -15,6 +16,15 @@ public class TaskViewModel {
     private ProgressEnums progress;
 
     public TaskViewModel() {
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public TaskViewModel setId(Long id) {
+        this.id = id;
+        return this;
     }
 
     public String getName() {

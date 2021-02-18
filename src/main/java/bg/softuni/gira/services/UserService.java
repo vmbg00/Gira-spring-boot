@@ -11,4 +11,6 @@ public interface UserService {
     boolean authenticate(String email, String password);
 
     void login(UserLoginServiceModel userLoginServiceModel);
+
+    void logout();
 }

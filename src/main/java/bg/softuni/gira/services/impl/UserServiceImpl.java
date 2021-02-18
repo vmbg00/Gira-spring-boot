@@ -50,4 +50,9 @@ public class UserServiceImpl implements UserService {
 
         currentUser.setName(user.get().getUsername()).setAnonymous(false);
     }
+
+    @Override
+    public void logout() {
+        this.currentUser.setName(null).setAnonymous(true);
+    }
 }

@@ -10,20 +10,10 @@ public class User extends BaseEntity{
     private String username;
     private String password;
     private String email;
-    private List<Task> tasks;
 
     public User() {
     }
 
-    @OneToMany
-    public List<Task> getTasks() {
-        return tasks;
-    }
-
-    public User setTasks(List<Task> tasks) {
-        this.tasks = tasks;
-        return this;
-    }
 
     @Column(unique = true, nullable = false)
     public String getUsername() {

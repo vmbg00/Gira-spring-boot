@@ -67,4 +67,21 @@ public class TaskServiceImpl implements TaskService {
 
         return tasks;
     }
+
+    @Override
+    public void progressUp(Long id) {
+        Task task = this.taskRepository.findById(id).get();
+
+        if (task.getProgress().equals(ProgressEnums.OPEN)){
+            task.setProgress(ProgressEnums.IN_PROGRESS);
+            taskRepository.save(task);
+        }
+        else if (task.getProgress().equals(ProgressEnums.IN_PROGRESS)){
+            task.setProgress(ProgressEnums.COMPLETED);
+            taskRepository.save(task);
+        }
+        else if (task.getProgress().equals(ProgressEnums.COMPLETED)){
+            this.taskRepository.delete(task);
+        }
+    }
 }
