@@ -1,5 +1,6 @@
 package bg.softuni.gira.web;
 
+import bg.softuni.gira.models.services.UserLoginServiceModel;
 import bg.softuni.gira.models.services.UserRegisterServiceModel;
 import bg.softuni.gira.services.UserService;
 import org.springframework.stereotype.Controller;
@@ -23,8 +24,37 @@ public class UserController {
     }
 
     @GetMapping("/login")
-    public String login(){
+    public String login(Model model){
+        if (!model.containsAttribute("userLoginServiceModel")){
+            model.addAttribute("userLoginServiceModel", new UserRegisterServiceModel());
+        }
         return "login";
+    }
+
+    @PostMapping("/login")
+    public String loginConfirm(@Valid UserLoginServiceModel userLoginServiceModel,
+                               BindingResult bindingResult,
+                               RedirectAttributes redirectAttributes){
+
+        if (bindingResult.hasErrors()) {
+            redirectAttributes.addFlashAttribute("userRegisterServiceModel", userLoginServiceModel);
+            redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.userLoginServiceModel", bindingResult);
+
+            return "redirect:login";
+        }
+
+        if (userService.authenticate(userLoginServiceModel.getEmail(), userLoginServiceModel.getPassword())){
+            userService.login(userLoginServiceModel);
+
+            return "redirect:/";
+        }
+        else {
+            redirectAttributes.addFlashAttribute("userLoginServiceModel", userLoginServiceModel);
+            redirectAttributes.addFlashAttribute("notFound", true);
+
+            return "redirect:login";
+        }
+
     }
 
     @GetMapping("/register")
