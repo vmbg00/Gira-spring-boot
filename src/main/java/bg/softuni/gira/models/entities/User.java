@@ -1,8 +1,7 @@
 package bg.softuni.gira.models.entities;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "users")
@@ -11,8 +10,19 @@ public class User extends BaseEntity{
     private String username;
     private String password;
     private String email;
+    private List<Task> tasks;
 
     public User() {
+    }
+
+    @OneToMany
+    public List<Task> getTasks() {
+        return tasks;
+    }
+
+    public User setTasks(List<Task> tasks) {
+        this.tasks = tasks;
+        return this;
     }
 
     @Column(unique = true, nullable = false)

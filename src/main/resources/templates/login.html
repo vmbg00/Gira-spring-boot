@@ -35,8 +35,10 @@
         <h1 class="text-center mt-2"><span class="badge badge-pill badge-dark">Login</span></h1>
         <hr class="hr-3 w-25 bg-white"/>
         <form class="mx-auto w-25 bg-blur" method="POST" action="/users/login" th:object="${userLoginServiceModel}">
-            <small class="text-danger new-line"></small>
-            <br/>
+            <th:block th:each="e : ${#fields.errors()}" th:object="${e}">
+                <small th:text="${e}" class="text-danger new-line">Error message</small>
+                <br/>
+            </th:block>
             <small th:if="${notFound}" class="text-danger new-line">Incorrect email or password!</small>
             <div class="form-group input-container">
                 <div class="input-container label-holder d-flex justify-content-center">

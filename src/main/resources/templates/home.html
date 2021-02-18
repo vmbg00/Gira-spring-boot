@@ -20,10 +20,10 @@
             <div class="collapse navbar-collapse  d-flex justify-content-end">
                 <ul class="navbar-nav row">
                     <li class="nav-item col-md-6">
-                        <a class="button text-nowrap" href="/">Add Task</a>
+                        <a class="button text-nowrap" href="/tasks/add">Add Task</a>
                     </li>
                     <li class="nav-item col-md-5">
-                        <a class="button" href="/">Logout</a>
+                        <a class="button" href="/users/logout">Logout</a>
                     </li>
                 </ul>
             </div>
@@ -32,7 +32,7 @@
     <main class="content-wrap">
         <h1 class="text-center mt-2"><span class="badge badge-pill badge-dark">Tasks</span></h1>
         <hr class="hr-3 w-75 bg-white"/>
-        <form class="mx-auto w-75 " method="" action="/">
+        <form class="mx-auto w-75 " method="GET" action="/" th:each="t : ${tasks}" th:object="${t}">
 
             <div class="card-group task-card">
                 <div class="card">
@@ -41,7 +41,7 @@
                         <h5 class="card-title">Name</h5>
                     </div>
                     <div class="card-footer">
-                        <small>Repair Laptop</small>
+                        <small th:text="*{name}">Repair Laptop</small>
                     </div>
                 </div>
                 <div class="card">
@@ -50,7 +50,7 @@
                         <h5 class="card-title">Assigned to</h5>
                     </div>
                     <div class="card-footer">
-                        <small>George</small>
+                        <small th:text="*{assignedTo}">George</small>
                     </div>
                 </div>
                 <div class="card">
@@ -59,7 +59,10 @@
                         <h5 class="card-title">Classification</h5>
                     </div>
                     <div class="card-footer">
-                        <small class="classifications SUPPORT">SUPPORT</small>
+                        <small th:if="*{classification.name() == 'SUPPORT'}" class="classifications SUPPORT">SUPPORT</small>
+                        <small th:if="*{classification.name() == 'FEATURE'}" class="classifications FEATURE">FEATURE</small>
+                        <small th:if="*{classification.name() == 'BUG'}" class="classifications BUG">BUG</small>
+                        <small th:if="*{classification.name() == 'OTHER'}" class="classifications OTHER">OTHER</small>
                     </div>
                 </div>
                 <div class="card">
@@ -67,7 +70,7 @@
                         <h5 class="card-title">Due Date</h5>
                     </div>
                     <div class="card-footer">
-                        <small>2020-08-30</small>
+                        <small th:text="*{dueDate}">2020-08-30</small>
                     </div>
                 </div>
                 <div class="card">
@@ -75,7 +78,7 @@
                         <h5 class="card-title">Progress</h5>
                     </div>
                     <div class="card-footer">
-                        <small>OPEN</small>
+                        <small th:text="*{progress}">OPEN</small>
                     </div>
                 </div>
 

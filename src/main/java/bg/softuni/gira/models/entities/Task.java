@@ -1,9 +1,12 @@
 package bg.softuni.gira.models.entities;
 
 import bg.softuni.gira.models.entities.enums.ProgressEnums;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.Date;
 
 @Entity
 @Table(name = "tasks")
@@ -12,7 +15,7 @@ public class Task extends BaseEntity{
     private String name;
     private String description;
     private ProgressEnums progress;
-    private LocalDateTime dueDate;
+    private Date dueDate;
     private Classification classification;
     private User user;
 
@@ -28,7 +31,7 @@ public class Task extends BaseEntity{
         this.name = name;
     }
 
-    @Column
+    @Column(columnDefinition = "TEXT")
     public String getDescription() {
         return description;
     }
@@ -47,11 +50,12 @@ public class Task extends BaseEntity{
     }
 
     @Column(name = "due_date")
-    public LocalDateTime getDueDate() {
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    public Date getDueDate() {
         return dueDate;
     }
 
-    public void setDueDate(LocalDateTime dueDate) {
+    public void setDueDate(Date dueDate) {
         this.dueDate = dueDate;
     }
 
